@@ -1,9 +1,9 @@
 ## TF2-Pony-Plugin-Pack
------
+
 The collection of plugins used on the Reddit Bronies TF2 Server. Visit us a www.reddit.com/r/mylittlepony
 
 ## Required Extensions
------
+
 * builtinvotes
 * colors
 * sdkhooks
@@ -14,7 +14,7 @@ The collection of plugins used on the Reddit Bronies TF2 Server. Visit us a www.
 * 
 
 ##Plugins in This Pack
------
+
 
 "Advanced admin commands" by 3sigma.  
 	Various administrator functionality, like changing health, teams, godmode, so on  
