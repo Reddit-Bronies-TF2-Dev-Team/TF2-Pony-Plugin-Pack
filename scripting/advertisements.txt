@@ -1,0 +1,38 @@
+"Advertisements"
+{
+    "msg1"
+    {
+      "type"        "S"
+      "text"        "{GREEN}If you'd like to donate to help keep the server up, you can send money via PayPal to {DEFAULT}mlpredditserver@gmail.com."
+    }
+    "msg2"
+    {
+      "type"        "S"
+      "text"        "{LIGHTGREEN}To see a list of sounds, type in {DEFAULT}!soundlist{LIGHTGREEN}. To stop the currently playing sound, type {DEFAULT}!stop{LIGHTGREEN}. To mute all sounds, type {DEFAULT}!sounds{LIGHTGREEN} and change your settings"
+    }
+    "msg3"
+    {
+      "type"		"S"
+      "text"		"{GREEN}Is somebody being a problem? Report them! Type in {DEFAULT}/report{GREEN} and follow the instructions."
+    }
+    "msg4"
+    {
+      "type"		"S"
+      "text"		"{GREEN}We have a brand new tiered donation system! Check out /r/mylittlefortress for more info."
+    }
+    "msg5"
+    {
+      "type"		"S"
+      "text"		"{LIGHTGREEN}Tired of this map? Use {DEFAULT}rtv{LIGHTGREEN} to initiate a change map vote!"
+    }
+    "msg6"
+    {
+      "type"		"S"
+      "text"		"{LIGHTGREEN}Need a team scramble? Simply type in {DEFAULT}!votescramble{LIGHTGREEN} to initiate a scramble!"
+    }
+    "msg7"
+    {
+      "type"		"S"
+      "text"		"{GREEN}Sprays are only enabled for those who join the Reddit Bronies Steam group and message the admins with their SteamID."
+    }
+}
