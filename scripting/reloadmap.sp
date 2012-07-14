@@ -17,6 +17,7 @@ new g_cartId = -1;
 new g_cartTrackerId = -1;
 new Handle:g_moveCheckTimer = INVALID_HANDLE;
 new Float:g_lastPosition[3];
+new bool:g_bypassCheck;
 
 public Plugin:myinfo = 
 {
@@ -84,12 +85,14 @@ public OnMapStart()
 		g_cartId = FindEntityByClassname(-1, "trigger_capture_area");
 		g_cartTrackerId = FindEntityByClassname(-1, "team_train_watcher");
 		HookSingleEntityOutput(g_cartId, "OnNumCappersChanged", OnNumCappersChanged);
+		g_bypassCheck = false;
 	}
 }
 
 public OnNumCappersChanged(const String:output[], caller, activator, Float:delay)
 {
-	CreateTimer(0.1, NextFrame);
+	if (!g_bypassCheck)
+		CreateTimer(0.1, NextFrame);
 }
 
 public Action:SendMessage(Handle:timer, any:client)
@@ -114,7 +117,7 @@ public Action:NextFrame(Handle:timer)
 		KillTimer(g_moveCheckTimer);
 		g_moveCheckTimer = INVALID_HANDLE;
 	}
-	else if (numCappers > 0)
+	else if (numCappers > 0 && g_moveCheckTimer == INVALID_HANDLE)
 	{
 		g_moveCheckTimer = CreateTimer(0.1, OnTick);
 		GetEntPropVector(g_cartId, Prop_Send, "m_vecOrigin", cartPosition);
@@ -165,6 +168,7 @@ public OnVoteFinished(Handle:vote, num_votes, num_clients,
 	{
 		DisplayBuiltinVotePass(vote, "Map will not be reloaded.");
 		PrintToChatAll("[SM] Map will not be reloaded.");
+		g_bypassCheck = true;
 	}
 	
 }
