@@ -7,7 +7,7 @@
 #include <tf2items_giveweapon>
 #include <sourceirc>
 
-#define PLUGIN_VERSION "1.0"
+#define PLUGIN_VERSION "1.1"
 #define MAX_CLIENT_IDS MAXPLAYERS + 1
 
 #define TEAM_SPEC 1
@@ -82,6 +82,9 @@ public OnPluginStart()
 		}
 		g_restricted[i] = false;
 	}
+	
+	if (LibraryExists("sourceirc"))
+		IRC_Loaded();
 }
 
 public OnAllPluginsLoaded() 
@@ -197,6 +200,7 @@ public Action:RestrictCommandIRC(const String:nick[], args)
 	decl String:arg[MAX_NAME_LENGTH];
 	decl String:name[MAX_NAME_LENGTH];
 	decl targets[MAX_CLIENT_IDS];
+	decl String:Arguments[256];
 	new bool:tn_is_ml;
 	
 	if (args < 1)
@@ -205,7 +209,15 @@ public Action:RestrictCommandIRC(const String:nick[], args)
 		return Plugin_Handled;
 	}
 	
-	GetCmdArg(1, arg, sizeof(arg));
+	IRC_GetCmdArgString(Arguments, sizeof(Arguments));
+	new len = BreakString(Arguments, arg, sizeof(arg));
+	
+	if (len < 0)
+	{
+		len = 0;
+		Arguments[0] = '\0';
+	}
+	
 	new num_targets = ProcessTargetString(arg, 0, targets, sizeof(targets), 0, name, sizeof(name), tn_is_ml);
 	
 	if (num_targets <= 0)
@@ -229,6 +241,7 @@ public Action:UnrestrictCommandIRC(const String:nick[], args)
 	decl String:arg[MAX_NAME_LENGTH];
 	decl String:name[MAX_NAME_LENGTH];
 	decl targets[MAX_CLIENT_IDS];
+	decl String:Arguments[256];
 	new bool:tn_is_ml;
 	
 	if (args < 1)
@@ -237,7 +250,14 @@ public Action:UnrestrictCommandIRC(const String:nick[], args)
 		return Plugin_Handled;
 	}
 	
-	GetCmdArg(1, arg, sizeof(arg));
+	IRC_GetCmdArgString(Arguments, sizeof(Arguments));
+	new len = BreakString(Arguments, arg, sizeof(arg));
+	
+	if (len < 0)
+	{
+		len = 0;
+		Arguments[0] = '\0';
+	}
 	new num_targets = ProcessTargetString(arg, 0, targets, sizeof(targets), 0, name, sizeof(name), tn_is_ml);
 	
 	if (num_targets <= 0)
