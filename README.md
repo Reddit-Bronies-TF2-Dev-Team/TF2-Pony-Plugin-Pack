@@ -48,6 +48,9 @@ __"Ponyspenser"__ by RainBolt Dash
 	Plugins has little overlay for inform engineers about ponyspenser.  
 	https://forums.alliedmods.net/showthread.php?p=1504136  
 	
+	Note: This plugin has texture, model, and sound assets not included in this pack. Please download
+	the necessary files from the link at alliedmods.net given above.
+	
 __"Reserved Sprays"__ by ShadowMoses, edited by ovenmittbandit  
 	Removes player spray unless they have reserved slot access.  
 	https://forums.alliedmods.net/showthread.php?p=969546  
