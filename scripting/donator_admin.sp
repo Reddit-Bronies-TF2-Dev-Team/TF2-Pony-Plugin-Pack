@@ -106,6 +106,7 @@ SaveDonatorToFile(const String:auth[], level)
 	decl String:configPath[PLATFORM_MAX_PATH];
 	decl String:tempPath[PLATFORM_MAX_PATH];
 	decl String:line[128];
+	decl String:authPart[128];
 	
 	BuildPath(Path_SM, configPath, sizeof(configPath), "data\\donators.txt");
 	BuildPath(Path_SM, tempPath, sizeof(tempPath), "data\\donators.txt.tmp");
@@ -113,26 +114,31 @@ SaveDonatorToFile(const String:auth[], level)
 	if (FindDonatorBySteamId(auth))
 	{
 		new Handle:configFile = OpenFile(configPath, "r");
-		new Handle:tempFile = OpenFile(tempPath, "w+");
+		new Handle:tempFile = OpenFile(tempPath, "w");
 		
 		while (!IsEndOfFile(configFile))
 		{
+			line = "";
+			authPart = "";
 			ReadFileLine(configFile, line, sizeof(line));
-			if (StrContains(line, auth))
+			TrimString(line);
+			SplitString(line, ";", authPart, sizeof(authPart));
+			if (StrEqual(authPart, auth))
 			{
 				if (level < 0)
-					continue;
-					
-				Format(line, sizeof(line), "%s;%d", auth, level);
-			}	
-			WriteFileLine(tempFile, line);	
+					line = "";
+				else
+					Format(line, sizeof(line), "%s;%d", auth, level);
+			}
+			if (!StrEqual(line, ""))
+				WriteFileLine(tempFile, line);	
 		}
 		
 		CloseHandle(configFile);
 		CloseHandle(tempFile);
 		
 		DeleteFile(configPath);
-		RenameFile(tempPath, configPath);
+		RenameFile(configPath, tempPath);
 	}
 	else
 	{
